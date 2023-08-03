@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-/* // Set global configuration option to remove the '__v' field
-mongoose.set('versionKey', false); */
 
 const completedOrderSchema = new mongoose.Schema({
   price: {
