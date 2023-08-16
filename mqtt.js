@@ -1,4 +1,4 @@
-/* // app.js
+// app.js
 const mqtt = require('mqtt');
 
 const createMqttClient = () => {
@@ -43,4 +43,4 @@ return client;
 
 };
 
-module.exports = createMqttClient; */
+module.exports = createMqttClient;
