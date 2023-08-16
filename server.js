@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const app = require('./app');
-const createMqttServer = require('./mqtt');
 
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
@@ -21,19 +20,10 @@ mongoose
   .then(() => {
     console.log('DB connection successful!');
 
-    // Create the MQTT server instance
-    const mqttServer = createMqttServer();
-
     // Start the Express server
     const port = process.env.PORT || 3000;
     const server = app.listen(port, () => {
       console.log(`App running on port ${port}...`);
-
-      // Start the MQTT server on a different port
-      const mqttPort = 8883;
-      mqttServer.listen(mqttPort, () => {
-        console.log(`MQTT server is listening on port ${mqttPort}...`);
-      });
     });
 
     process.on('unhandledRejection', err => {

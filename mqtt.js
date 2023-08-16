@@ -1,9 +1,8 @@
-// app.js
-const express = require('express');
+/* // app.js
 const mqtt = require('mqtt');
 
-const createMqttServer = () => {
-const app = express();
+const createMqttClient = () => {
+
 const clientId = `emqx_nodejs_${  Math.random().toString(16).substring(2, 8)}`
 const username = process.env.MQTT_USERNAME;
 const password = process.env.MQTT_PASSWORD;
@@ -18,12 +17,12 @@ const client = mqtt.connect(clientConnectString, {
 // MQTT topic
 const topic = process.env.MQTT_TOPIC;
 
-// Express route to publish a message
+/* // Express route to publish a message
 app.get('/:message', (req, res) => {
   const {message} = req.params;
   client.publish(topic, message);
   res.send(`Message published: ${message}`);
-});
+}); */
 
 // MQTT subscription
 client.on('connect', () => {
@@ -36,12 +35,12 @@ client.on('connect', () => {
     });
   });
 
-client.on('message', (_topic, message) => {
+/* client.on('message', (_topic, message) => {
   console.log('Received message:', message.toString());
-});
+}); */
 
-return app;
+return client;
 
 };
 
-module.exports = createMqttServer;
+module.exports = createMqttClient; */
