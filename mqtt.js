@@ -1,4 +1,4 @@
-// app.js
+/*  // app.js
 const mqtt = require('mqtt');
 
 const createMqttClient = () => {
@@ -17,30 +17,30 @@ const client = mqtt.connect(clientConnectString, {
 // MQTT topic
 const topic = process.env.MQTT_TOPIC;
 
-/* // Express route to publish a message
+ // Express route to publish a message
 app.get('/:message', (req, res) => {
   const {message} = req.params;
   client.publish(topic, message);
   res.send(`Message published: ${message}`);
-}); */
+}); 
 
 // MQTT subscription
 client.on('connect', () => {
     client.subscribe(topic, (err) => {
       if (err) {
         console.error('Error subscribing to topic:', err);
-      } /* else {
+      } else {
         console.log('Subscribed to topic:', topic);
-      } */
+       } 
     });
-  });
+  }); 
 
-/* client.on('message', (_topic, message) => {
+ client.on('message', (_topic, message) => {
   console.log('Received message:', message.toString());
-}); */
+}); 
 
 return client;
 
 };
 
-module.exports = createMqttClient;
+module.exports = createMqttClient; */
