@@ -13,6 +13,8 @@ const completedOrderSchema = new mongoose.Schema(
     },
     dish: [
       {
+        _id: false,
+        id: Number,
         title: String,
         stuffing: [String],
         ingredients: [String],
@@ -24,6 +26,8 @@ const completedOrderSchema = new mongoose.Schema(
     ],
     sides: [
       {
+        _id: false,
+        id: Number,
         title: String,
         multiplier: { type: Number, required: true },
         comments: [String],
@@ -31,6 +35,8 @@ const completedOrderSchema = new mongoose.Schema(
     ],
     beverages: [
       {
+        _id: false,
+        id: Number,
         title: String,
         multiplier: { type: Number, required: true },
         comments: [String],

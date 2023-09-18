@@ -27,9 +27,7 @@ class MQTTService {
     });
 
     this.mqttClient.on('message', (topic, message) => {
-      console.log(
-        `Received message on topic '${topic}': ${message.toString()}`,
-      );
+      /* console.log(`Received message on topic '${topic}': SUCCESS}`); */
       if (messageCallback) {
         messageCallback(topic, message);
       }

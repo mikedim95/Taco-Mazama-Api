@@ -17,11 +17,10 @@ exports.createOrder = catchAsync(async (req, res) => {
 
   if (!mqttService) {
     console.error('MQTTService instance not available');
-    return;
+    return res
+      .status(500)
+      .json({ error: 'MQTTService instance not available' });
   }
-
-  /*   // Modify the doc object before publishing
-  const modifiedPrice = doc.price; */
 
   // Construct the message to publish
   const messageToPublish = JSON.stringify({
@@ -30,11 +29,12 @@ exports.createOrder = catchAsync(async (req, res) => {
 
   // Use the mqttService instance to publish the message
   mqttService.publish(process.env.MQTT_TOPIC, messageToPublish);
+  console.log(
+    `Message published on topic '${process.env.MQTT_TOPIC}': SUCCESS}`,
+  );
 
+  // Send the response here
   res.status(201).json({
     status: 'success',
-    data: {
-      data: doc,
-    },
   });
 });
