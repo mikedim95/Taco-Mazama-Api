@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-/* const cors = require('cors'); */
+const cors = require('cors');
 const orderRoute = require('./routes/orderRoute');
 const MQTTService = require('./mqttConstractor');
 // Create an instance of MQTTService
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
-/* app.use(cors()); */
+app.use(cors());
 app.use(bodyParser.json());
 app.use('/order', orderRoute);
 
