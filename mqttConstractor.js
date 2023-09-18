@@ -1,9 +1,9 @@
-const mqtt = require("mqtt");
+const mqtt = require('mqtt');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: './config.env' })
+dotenv.config({ path: './config.env' });
 
-const {MQTT_TOPIC} = process.env
+const { MQTT_TOPIC } = process.env;
 
 class MQTTService {
   constructor() {
@@ -16,25 +16,27 @@ class MQTTService {
       password,
     });
 
-    this.mqttClient.on("error", (err) => {
-      console.error("MQTT Error:", err);
+    this.mqttClient.on('error', (err) => {
+      console.error('MQTT Error:', err);
       this.mqttClient.end();
     });
 
-    this.mqttClient.on("connect", () => {
-      console.log("MQTT client connected");
+    this.mqttClient.on('connect', () => {
+      console.log('MQTT client connected');
       this.mqttClient.subscribe(MQTT_TOPIC);
     });
 
-    this.mqttClient.on("message", (topic, message) => {
-      console.log(`Received message on topic '${topic}': ${message.toString()}`);
+    this.mqttClient.on('message', (topic, message) => {
+      console.log(
+        `Received message on topic '${topic}': ${message.toString()}`,
+      );
       if (messageCallback) {
         messageCallback(topic, message);
       }
     });
 
-    this.mqttClient.on("close", () => {
-      console.log("MQTT client disconnected");
+    this.mqttClient.on('close', () => {
+      console.log('MQTT client disconnected');
     });
   }
 
@@ -42,7 +44,7 @@ class MQTTService {
     if (this.mqttClient) {
       this.mqttClient.publish(topic, message);
     } else {
-      console.error("MQTT client not connected");
+      console.error('MQTT client not connected');
     }
   }
 
@@ -53,4 +55,4 @@ class MQTTService {
   }
 }
 
-module.exports = MQTTService
+module.exports = MQTTService;

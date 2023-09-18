@@ -1,31 +1,44 @@
 const mongoose = require('mongoose');
 
-
-const completedOrderSchema = new mongoose.Schema({
-  price: {
-    type: Number,
-    required: [true, 'Order must have a price.']
+const completedOrderSchema = new mongoose.Schema(
+  {
+    tableNo: {
+      id: Number,
+      type: Number,
+      required: [true, 'Order must coming from a table.'],
+    },
+    price: {
+      type: Number,
+      required: [true, 'Order must have a price.'],
+    },
+    dish: [
+      {
+        title: String,
+        stuffing: [String],
+        ingredients: [String],
+        salsa: [String],
+        extras: [String],
+        multiplier: { type: Number, required: true },
+        comments: [String],
+      },
+    ],
+    sides: [
+      {
+        title: String,
+        multiplier: { type: Number, required: true },
+        comments: [String],
+      },
+    ],
+    beverages: [
+      {
+        title: String,
+        multiplier: { type: Number, required: true },
+        comments: [String],
+      },
+    ],
   },
-  dish: [{
-    id: Number,
-    title: String,
-    stuffing: [String],
-    ingredients: [String],
-    salsa: [String],
-    extras: [String],
-    multiplier: {type: Number, required:true}
-  }],
-  sides: [{
-    id: Number,
-    title: String,
-    multiplier: {type: Number, required:true}
-  }],
-  beverages: [{
-    id: Number,
-    title: String,
-    multiplier: {type: Number, required:true}
-  }]
-}, { versionKey: false }); // Setting versionKey to false
+  { versionKey: false },
+); // Setting versionKey to false
 
 const completedOrder = mongoose.model('CompletedOrder', completedOrderSchema);
 module.exports = completedOrder;
