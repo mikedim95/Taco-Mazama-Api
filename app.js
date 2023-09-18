@@ -2,13 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const orderRoute = require('./routes/orderRoute');
 const MQTTService = require('./mqttConstractor');
-
+const cors = require('cors'); // Import the 'cors' package
 // Create an instance of MQTTService
 const mqttService = new MQTTService();
 mqttService.connect(
   process.env.MQTT_USERNAME,
   process.env.MQTT_PASSWORD,
-  process.env.MQTT_CLIENT_CONNECT_STRING
+  process.env.MQTT_CLIENT_CONNECT_STRING,
 );
 
 // Start express app
@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
+app.use(cors());
 app.use(bodyParser.json());
 app.use('/order', orderRoute);
 
