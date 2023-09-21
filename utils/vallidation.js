@@ -6,7 +6,7 @@ const isAlphaString = (value) => {
   if (typeof value !== 'string') {
     return false;
   }
-  return /^[a-zA-Z]+$/.test(value);
+  return /^[a-zA-Z\s]+$/.test(value);
 };
 
 const validateOrder = [
