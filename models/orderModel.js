@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
-
+function func(value) {
+  return /^[1-9\s]+$/.test(value);
+}
 const completedOrderSchema = new mongoose.Schema(
   {
     tableNo: {
       id: Number,
       type: Number,
       required: [true, 'Order must coming from a table.'],
+      validate: [func, 'is not a valid String!'],
     },
     price: {
       type: Number,
@@ -21,6 +24,7 @@ const completedOrderSchema = new mongoose.Schema(
         salsa: [String],
         extra: [String],
         multiplier: { type: Number, required: true },
+
         comments: [String],
       },
     ],

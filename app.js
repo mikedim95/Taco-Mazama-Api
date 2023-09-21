@@ -18,11 +18,11 @@ mqttService.connect(
 const app = express();
 
 app.use(helmet());
-
-const corsOptions = {
+app.use(cors());
+/* const corsOptions = {
   origin: 'https://taco-mazama-front.onrender.com',
   optionsSuccessStatus: 200,
-};
+}; */
 
 // Pass the mqttService instance to the controllers
 app.use((req, res, next) => {
@@ -32,6 +32,6 @@ app.use((req, res, next) => {
 
 // 3) ROUTES
 app.use(express.json());
-app.use('/order', cors(corsOptions), orderRoute);
+app.use('/order', /* cors(corsOptions),  */ orderRoute);
 
 module.exports = app;
