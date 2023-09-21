@@ -83,8 +83,8 @@ const validateOrder = [
       return true;
     }),
 
-  // Validate dishes extras
-  body('dish.*.extras')
+  // Validate dishes extra
+  body('dish.*.extra')
     .optional()
     .custom((value, { req }) => {
       if (!Array.isArray(value)) {

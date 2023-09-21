@@ -19,7 +19,7 @@ const completedOrderSchema = new mongoose.Schema(
         stuffing: [String],
         ingredients: [String],
         salsa: [String],
-        extras: [String],
+        extra: [String],
         multiplier: { type: Number, required: true },
         comments: [String],
       },
