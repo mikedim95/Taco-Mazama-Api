@@ -1,7 +1,19 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const app = require('./app');
+const MQTTService = require('./mqttConstructor');
+const mqttService = new MQTTService();
+mqttService.connect(
+  process.env.MQTT_USERNAME,
+  process.env.MQTT_PASSWORD,
+  process.env.MQTT_CLIENT_CONNECT_STRING,
+);
 
+// Pass the mqttService instance to the controllers
+app.use((req, res, next) => {
+  req.mqttService = mqttService;
+  next();
+});
 process.on('uncaughtException', (err) => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
   console.log(err.name, err.message);
@@ -41,3 +53,14 @@ mongoose
       });
     });
   });
+mqttService.publish(
+  'updatePublicIP',
+  'from cloud API to get the TACO public IP in app.js',
+  (err) => {
+    if (err) {
+      console.error('Error publishing message:', err);
+    } else {
+      console.log('Message published successfully');
+    }
+  },
+);
