@@ -2,14 +2,14 @@ const express = require('express');
 const orderController = require('../controllers/orderController');
 const {
   ipAuthMiddleware,
-  updatePublicIP,
+  /* updatePublicIP, */
 } = require('../middlewares/ipAuthentication'); // Update the path accordingly
 const orderModel = require('../models/orderModel');
 
 const router = express.Router();
 
 // Define your route
-router.post('/', updatePublicIP, ipAuthMiddleware, (req, res, next) => {
+router.post('/', /* updatePublicIP,  */ ipAuthMiddleware, (req, res, next) => {
   console.log(req.body);
   orderController.createOrder(req, res, next, orderModel);
 });

@@ -56,11 +56,4 @@ mongoose
 mqttService.publish(
   'updatePublicIP',
   'from cloud API to get the TACO public IP in app.js',
-  (err) => {
-    if (err) {
-      console.error('Error publishing message:', err);
-    } else {
-      console.log('Message published successfully');
-    }
-  },
 );

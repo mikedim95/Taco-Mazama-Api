@@ -14,7 +14,7 @@ const ipAuthMiddleware = (req, res, next) => {
   }
 };
 
-const updatePublicIP = (req, res, next) => {
+/* const updatePublicIP = (req, res, next) => {
   console.log('Entering updatePublicIP middleware');
 
   const mqttService = req.mqttService;
@@ -33,5 +33,5 @@ const updatePublicIP = (req, res, next) => {
   );
 
   next();
-};
-module.exports = { ipAuthMiddleware, updatePublicIP };
+}; */
+module.exports = { ipAuthMiddleware /* updatePublicIP */ };
