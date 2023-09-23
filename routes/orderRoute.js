@@ -9,9 +9,17 @@ const orderModel = require('../models/orderModel');
 const router = express.Router();
 
 // Define your route
-router.post('/', ipAuthMiddleware, (req, res, next) => {
-  console.log(req.body);
-  orderController.createOrder(req, res, next, orderModel);
+router.post('/', ipAuthMiddleware, async (req, res, next) => {
+  try {
+    const orderData = req.body; // Assuming your JSON data is in the request body
+    await orderController.createOrder(req, res, null, orderData); // Pass the orderData to the controller
+
+    // Respond with a success message or appropriate response
+    res.status(200).send('Order created successfully');
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 module.exports = router;

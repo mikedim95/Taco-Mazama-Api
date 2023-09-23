@@ -1,7 +1,6 @@
 const completedOrder = require('../models/orderModel');
-const catchAsync = require('../utils/catchAsync');
 
-exports.createOrder = catchAsync(async (req, res) => {
+exports.createOrder = async (req, res) => {
   const doc = await completedOrder.create(req.body);
   const { tableNo, price, dish, sides, beverages } = doc;
 
@@ -13,28 +12,45 @@ exports.createOrder = catchAsync(async (req, res) => {
     beverages,
   };
 
-  const { mqttService } = req; // Get the mqttService instance from the request
+  const { mqttClient } = req; // Get the mqttClient instance from the request
 
-  if (!mqttService) {
-    console.error('MQTTService instance not available');
-    return res
-      .status(500)
-      .json({ error: 'MQTTService instance not available' });
+  if (!mqttClient) {
+    console.error('mqttClient instance not available');
+    return res.status(500).json({ error: 'mqttClient instance not available' });
   }
 
   // Construct the message to publish
   const messageToPublish = JSON.stringify({
     order: orderData,
   });
-
-  // Use the mqttService instance to publish the message
-  mqttService.publish(process.env.MQTT_TOPIC, messageToPublish);
-  console.log(
-    `Message published on topic '${process.env.MQTT_TOPIC}': SUCCESS}`,
+  mqttClient.publish(
+    process.env.MQTT_updatePublicIP,
+    'messageToPublish',
+    (err) => {
+      if (err) {
+        console.error(
+          'Error publishing to topic:',
+          process.env.MQTT_updatePublicIP,
+          err,
+        );
+      } else {
+        console.log(
+          'Successfully published to topic:',
+          process.env.MQTT_updatePublicIP,
+        );
+      }
+    },
   );
+  // Use the mqttClient instance to publish the message
+  mqttClient.publish(process.env.MQTT_TOPIC, messageToPublish, (err) => {
+    if (err) {
+      console.error('Error publishing to topic:', process.env.MQTT_TOPIC, err);
+    }
 
-  // Send the response here
-  res.status(201).json({
-    status: 'success',
+    console.log('Successfully published to topic:', process.env.MQTT_TOPIC);
+
+    // Send the response here
   });
-});
+
+  // Additional publishing
+};
