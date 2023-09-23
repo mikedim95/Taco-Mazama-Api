@@ -9,7 +9,7 @@ const orderModel = require('../models/orderModel');
 const router = express.Router();
 
 // Define your route
-router.post('/', /* updatePublicIP,  */ ipAuthMiddleware, (req, res, next) => {
+router.post('/', ipAuthMiddleware, (req, res, next) => {
   console.log(req.body);
   orderController.createOrder(req, res, next, orderModel);
 });
