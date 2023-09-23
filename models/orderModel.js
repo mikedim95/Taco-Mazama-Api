@@ -25,6 +25,7 @@ const completedOrderSchema = new mongoose.Schema(
         salsa: [String],
         extra: [String],
         multiplier: { type: Number, required: true },
+        size: { type: String, required: true },
 
         comments: [String],
       },
