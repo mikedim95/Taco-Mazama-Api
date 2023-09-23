@@ -1,6 +1,6 @@
 const mqtt = require('mqtt');
 const mqttClientConstructor = () => {
-  const clientId = 'Cloud_API';
+  const clientId = process.env.MQTT_CLIENT;
   const username = process.env.MQTT_USERNAME;
   const password = process.env.MQTT_PASSWORD;
   const clientConnectString = process.env.MQTT_CLIENT_CONNECT_STRING;
@@ -14,7 +14,7 @@ const mqttClientConstructor = () => {
 
   // MQTT topic
   const topic = process.env.MQTT_TOPIC;
-  const updatePublicIP = process.env.MQTT_updatePublicIP;
+  const updatePublicIP = process.env.MQTT_UPDATE_PUBLIC_IP;
 
   // MQTT subscription
   client.on('connect', async () => {
@@ -25,7 +25,7 @@ const mqttClientConstructor = () => {
         console.log('Subscribed to topic:', topic);
       }
     });
-    client.publish(updatePublicIP, 'message', (err) => {
+    client.publish('updatePublicIP', 'message', (err) => {
       if (!err) {
         console.log('Successfully published to topic:', updatePublicIP);
       } else {
