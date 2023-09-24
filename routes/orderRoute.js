@@ -18,7 +18,9 @@ router.post('/', ipAuthMiddleware, async (req, res, next) => {
     res.status(200).send('Order created successfully');
   } catch (error) {
     console.error('Error:', error.message);
-    res.status(500).send('Internal Server Error');
+
+    // Send the error message and status code as the response
+    res.status(500).json({ error: error.message });
   }
 });
 

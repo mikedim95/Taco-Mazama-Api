@@ -19,7 +19,7 @@ exports.createOrder = async (req, res) => {
     console.error('mqttClient instance not available');
     return res.status(500).json({ error: 'mqttClient instance not available' });
   }
-  console.log(orderData);
+
   // Construct the message to publish
   const messageToPublish = JSON.stringify({
     order: orderData,
