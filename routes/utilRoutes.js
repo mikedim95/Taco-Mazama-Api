@@ -12,11 +12,7 @@ router.post('/', (req, res, next) => {
   res.status(200).json({ publicIP });
 });
 router.get('/', (req, res, next) => {
-  res
-    .status(200)
-    .send(
-      `the  req.app.locals.globalPublicIP is: ${req.app.locals.globalPublicIP}`,
-    );
+  res.status(200).send(req.app.locals.globalPublicIP);
   console.log(req.app.locals.globalPublicIP);
 });
 
