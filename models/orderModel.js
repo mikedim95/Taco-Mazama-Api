@@ -34,20 +34,36 @@ const completedOrderSchema = new mongoose.Schema(
       {
         _id: false,
         id: Number,
-        title: String,
         multiplier: { type: Number, required: true },
         comments: [String],
       },
     ],
-    beverages: [
-      {
-        _id: false,
-        id: Number,
-        title: String,
-        multiplier: { type: Number, required: true },
-        comments: [String],
-      },
-    ],
+    beverages: {
+      beers: [
+        {
+          _id: false,
+          id: Number,
+          title: String,
+          multiplier: { type: Number, required: true },
+        },
+      ],
+      drinks: [
+        {
+          _id: false,
+          id: Number,
+          title: String,
+          multiplier: { type: Number, required: true },
+        },
+      ],
+      softDrinks: [
+        {
+          _id: false,
+          id: Number,
+          title: String,
+          multiplier: { type: Number, required: true },
+        },
+      ],
+    },
   },
   { versionKey: false },
 ); // Setting versionKey to false

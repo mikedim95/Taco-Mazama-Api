@@ -4,7 +4,7 @@ const {
   ipAuthMiddleware,
   /* updatePublicIP, */
 } = require('../middlewares/ipAuthentication'); // Update the path accordingly
-const orderModel = require('../models/orderModel');
+/* const orderModel = require('../models/orderModel'); */
 
 const router = express.Router();
 

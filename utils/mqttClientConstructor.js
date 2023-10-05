@@ -1,4 +1,5 @@
 const mqtt = require('mqtt');
+
 const mqttClientConstructor = () => {
   const clientId = process.env.MQTT_CLIENT;
   const username = process.env.MQTT_USERNAME;

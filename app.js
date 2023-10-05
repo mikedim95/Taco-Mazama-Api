@@ -1,13 +1,16 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const orderRoute = require('./routes/orderRoute');
 const utilRoutes = require('./routes/utilRoutes');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+
 dotenv.config({ path: './config.env' });
+
 const app = express();
-const createMqttClient = require('./utils/mqttClientConstructor.js');
+const createMqttClient = require('./utils/mqttClientConstructor');
+
 const mqttClient = createMqttClient();
 
 app.use((req, res, next) => {
